@@ -1,11 +1,11 @@
-import random
+small = True
+green = True
 
-secret = random.randint(1,10)
-guess = int(input())
-
-if secret > guess:
-    print('too low')
-elif secret < guess:
-    print('too high')
+if small and green:
+    print('완두콩')
+elif small and not green:
+    print('체리')
+elif not small and not green:
+    print('호박')
 else:
-    print('just right')
+    print('수박')

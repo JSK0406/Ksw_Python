@@ -1,11 +1,27 @@
-# number = 0b10011010
-# number = 0x9A
-# number = 0o232
+# chap 4
 
-# number = 154
-# print(bin(number))
-# print(hex(number))
-# print(oct(number))
+# a = []
+# print(bool(a))
+# a.append(5)
+# print(bool(a))
+# print(bool(set()))
+# print(bool({}))
+# print(bool(''))
+#
+# vowels = 'aeiou'
+# letter = 'ae'
+#
+# if letter in vowels:
+#     print('yes')
 
-# print(ord(" "))
-# print(hex(ord(" ")))
+# limit = 20
+# tweets = "pass" * 7
+# if limit - len(tweets) >= 0:
+#     print(tweets)
+# else:
+#     print('제한 글자 수 초과')
+#
+# if diff := limit - len(tweets) >= 0: ????
+#     print(tweets)
+# else:
+#     print(abs(diff))

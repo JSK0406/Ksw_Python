@@ -1,47 +1,27 @@
-# while True:
-#     dan = int(input('dan : '))
-#     if dan == 0:
-#         break
-#     if 2 <= dan <= 9:
-#         for i in range(1, 10):
-#             print(f'{dan} * {i} = {dan * i}')
-#     else:
-#         continue
+start = int(input('start number : '))
+end = int(input('end number : '))
 
-num = int(input('input number : '))
-cnt = 0
+if end < start:
+    start, end = end, start
 
-# k = 1
-# while k <= num:
-#     if num % k == 0:
-#         cnt += 1
-#     k += 1
-# if cnt == 2:
-#     print(f'{num} is prime number')
-# else:
-#     print(f'{num} is not prime number')
+for num in range(start, end+1):
+    if not num >= 2:
+        continue
+    for j in range(2, num):
+        if num % j == 0:
+            break
+    else:
+        print(num, end=' ')
 
-# for k in range(1, num+1):
-#     if num % k == 0:
-#         cnt += 1
-#     k += 1
-# if cnt == 2:
-#     print(f'{num} is prime number')
-# else:
-#     print(f'{num} is not prime number')
+print('')
 
-# cnt = 0
-# for k in range(2, num):
-#     if num % k:
-#         cnt += 1
-# if cnt:
-#     print(f'{num} is prime number')
-# else:
-#     print(f'{num} is not prime number')
-
-for i in range(2, num):
-    if num % i == 0:
-        print(f'{num} is not prime number')
-        break
-else:
-    print(f'{num} is prime number')
+while start <= end:
+    i = 2
+    while i <= start-1:
+        if start % i == 0:
+            break
+        i += 1
+    else:
+        if start >= 2:
+            print(start, end=' ')
+    start += 1

@@ -1,11 +1,7 @@
-import random
+limit = 200
+tweet = 'blah'*80
 
-secret = random.randint(1,10)
-guess = int(input())
-
-if secret > guess:
-    print('too low')
-elif secret < guess:
-    print('too high')
+if diff := limit-len(tweet) >= 0:
+    print("yes")
 else:
-    print('just right')
+    print("over", abs(diff))

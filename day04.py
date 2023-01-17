@@ -80,3 +80,6 @@ print(a==b)  # True
 
 # 딕셔너리 컴프리헨션 가능
 
+lst = ['a', 'b']
+for i in lst:
+    print(type(i))

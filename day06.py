@@ -1,87 +1,37 @@
-# # generator
-#
-# def a():
-#     yield 1
-#     yield 2
-#     yield 3
-#
-#
-# def b():
-#     return 1
-#     return 2
-#     return 3
-#
-# # decorator
-#
-# # general decorator
-# def document_it(func):
-#     def new_function(*args, **kwargs):
-#         print('running function:', func.__name__)
-#         print('positional arguments:', args)
-#         print('keyword arguments:', kwargs)
-#         result = func(*args, **kwargs)
-#         print('result:', result)
-#         return result
-#     return new_function
-#
-# def add_ints(a, b):
-#     return a + b
-#
-# cooler_add_ints = document_it(add_ints)
-# print(cooler_add_ints(3,5))
-#
-# # special decorator
-# def document_it(func):
-#     def new_function(*args, **kwargs):
-#         print('running function:', func.__name__)
-#         print('positional arguments:', args)
-#         print('keyword arguments:', kwargs)
-#         result = func(*args, **kwargs)
-#         print('result:', result)
-#         return result
-#     return new_function
-#
-# @document_it
-# def add_ints(a, b):
-#     return a + b
-#
-# print(add_ints(3,5))
+# Class
 
 
-# recursion
-
-# def factorial_iter(n):
-#     result = 1
-#     for i in range(1, n+1):
-#         result *= i
-#     return result
+# class Cat:
+#     def __init__(self):
+#
+#     pass
 #
 #
-# def factorial_recursion(n):
-#     if n == 1:
-#         return 1
-#     else:
-#         return factorial_recursion(n-1) * n
+# a_cat = Cat()
+# another_cat = Cat()
 #
-#
-# print(factorial_iter(5))
-# print(factorial_recursion(5))
+# a_cat.age = 3
+# print(a_cat.age)
 
-# exception
+class pokemon:
+    def __init__(self, name, owner, skills):  # 개체 생성 시 동작
+        print(f'포켓몬 {name} 생성됨')
+        self.name = name
+        self.owner = owner
+        self.skills = skills.split('/')
 
-# try:
-#     expression = input('분자 분모 입력: ').split()
-#     print(int(expression[0]) / int(expression[1]))
-# except ValueError:
-#     print('숫자를 입력해주세요')
-# except ZeroDivisionError as err:
-#     print('분모에 0이 올 수 없습니다.')
-#     print(err)
-# except IndexError as err:
-#     print('예외 발생')
-#     print(err)
-# else:
-#     print('프로그램 정상', end=" ")
-# finally:
-#     print('종료')
 
+    def info(self):
+        print(f'{self.owner}의 포켓몬은 {self.name}입니다.')
+        for skill in self.skills:
+            print(skill)
+
+
+class pikachu(pokemon):
+    pass
+
+
+p1 = pokemon('피카츄', '한지우', '50만 볼트/100만볼트/번개')
+p2 = pokemon('꼬부기', '오바람', '고속스핀/거품/몸통박치기/하이드로펌프')
+pi1 = pikachu('피카츄', '한지우', '50만 볼트/100만볼트/번개')
+pi1.info()

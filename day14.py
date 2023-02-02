@@ -22,6 +22,8 @@ class Pokemon:
     def attack(self, idx):
         print(f'{self.skills[idx]} 공격 시전')
 
+    owner = property(get_owner, set_owner)
+
 
 class Pikachu(Pokemon):
     def __init__(self, owner, skills):
@@ -30,7 +32,7 @@ class Pikachu(Pokemon):
         print(f"{self.name}")
 
     def attack(self, idx):
-        print(f'{self.get_owner()}의 {self.name}의 {self.skills[idx]} 공격(전기) 시전')
+        print(f'{self.owner}의 {self.name}의 {self.skills[idx]} 공격(전기) 시전')
 
 
 class Ggo(Pokemon):
@@ -40,7 +42,7 @@ class Ggo(Pokemon):
         print(f"{self.name}")
 
     def attack(self, idx):
-        print(f'{self.get_owner()}의 {self.name}의 {self.skills[idx]} 공격(물) 시전')
+        print(f'{self.owner}의 {self.name}의 {self.skills[idx]} 공격(물) 시전')
 
 
 pk1 = Pikachu('한지우','몸톧박치기/번개')

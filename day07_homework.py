@@ -126,9 +126,9 @@ ex_sm = SmartPhone()
 
 class Robot():
     def __init__(self, ex_la, ex_cl, ex_sm):
-        self.laser_dose = ex_la.does()
-        self.claw_dose = ex_cl.does()
-        self.smart_does = ex_sm.does()
+        self.laser_dose = _ex_la.does()
+        self.claw_dose = _ex_cl.does()
+        self.smart_does = _ex_sm.does()
 
     def does(self):
         return f'{self.laser_dose} {self.claw_dose} {self.smart_does}'

@@ -1,18 +1,21 @@
-
 # class_inheritance
 #
 # class_method_override
+# property and decorator
+
 class Pokemon:
     def __init__(self, owner, skills):
         print(f"포켓몬 생성 :", end='')
-        self.hidden_owner = owner
+        self.__hidden_owner = owner
         self.skills = skills.split('/')
 
-    def get_owner(self):
-        return self.hidden_owner
+    @property
+    def owner(self):
+        return self.__hidden_owner
 
-    def set_owner(self, owner):
-        self.hidden_owner = owner
+    @owner.setter
+    def owner(self, owner):
+        self.__hidden_owner = owner
 
     def info(self):
         print(f"{self.owner()}의 포켓몬이 사용가능한 스킬은{self.skills}입니다.")
@@ -22,7 +25,7 @@ class Pokemon:
     def attack(self, idx):
         print(f'{self.skills[idx]} 공격 시전')
 
-    owner = property(get_owner, set_owner)
+    # owner = property(get_owner, set_owner)
 
 
 class Pikachu(Pokemon):
@@ -45,11 +48,11 @@ class Ggo(Pokemon):
         print(f'{self.owner}의 {self.name}의 {self.skills[idx]} 공격(물) 시전')
 
 
-pk1 = Pikachu('한지우','몸톧박치기/번개')
-pk1.attack(1)
-
-ggo1 = Ggo('덴트', '몸통박치기/물대포')
-ggo1.attack(0)
+# pk1 = Pikachu('한지우','몸톧박치기/번개')
+# pk1.attack(1)
+#
+# ggo1 = Ggo('덴트', '몸통박치기/물대포')
+# ggo1.attack(0)
 
 
 # multiple_inheritance
@@ -114,6 +117,8 @@ while True:
             n = input('플레이어 이름 입력 : ')
             s = input('사용 가능한 기술 입력(/로 구분하여 입력)')
             p = Pikachu(n, s)
+            p.owner = "한지우"
+            # p.__hidden.owner = "한지우"   __로 바꾸면 private처럼 작동 / but 클래스명을 앞에 붙이면 가능
         if pokemon == '2':
             n = input('플레이어 이름 입력 : ')
             s = input('사용 가능한 기술 입력(/로 구분하여 입력)')

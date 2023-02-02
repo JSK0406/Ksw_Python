@@ -3,49 +3,50 @@
 # class_method_override
 # property and decorator
 
-class Pokemon:
-    def __init__(self, owner, skills):
-        print(f"포켓몬 생성 :", end='')
-        self.__hidden_owner = owner
-        self.skills = skills.split('/')
-
-    @property
-    def owner(self):
-        return self.__hidden_owner
-
-    @owner.setter
-    def owner(self, owner):
-        self.__hidden_owner = owner
-
-    def info(self):
-        print(f"{self.owner()}의 포켓몬이 사용가능한 스킬은{self.skills}입니다.")
-        for skill in self.skills:
-            print(skill)
-
-    def attack(self, idx):
-        print(f'{self.skills[idx]} 공격 시전')
-
-    # owner = property(get_owner, set_owner)
-
-
-class Pikachu(Pokemon):
-    def __init__(self, owner, skills):
-        super().__init__(owner, skills)
-        self.name = "꼬부기"
-        print(f"{self.name}")
-
-    def attack(self, idx):
-        print(f'{self.owner}의 {self.name}의 {self.skills[idx]} 공격(전기) 시전')
-
-
-class Ggo(Pokemon):
-    def __init__(self, owner, skills):
-        super().__init__(owner, skills)
-        self.name = "꼬부기"
-        print(f"{self.name}")
-
-    def attack(self, idx):
-        print(f'{self.owner}의 {self.name}의 {self.skills[idx]} 공격(물) 시전')
+# class Pokemon:
+#     count = 0
+#     def __init__(self, owner, skills):
+#         print(f"포켓몬 생성 :", end='')
+#         self.__hidden_owner = owner
+#         self.skills = skills.split('/')
+#         Pokemon.count += 1
+#
+#     @property
+#     def owner(self):
+#         return self.__hidden_owner
+#
+#     @owner.setter
+#     def owner(self, owner):
+#         self.__hidden_owner = owner
+#
+#     def info(self):
+#         print(f"{self.owner()}의 포켓몬이 사용가능한 스킬은{self.skills}입니다.")
+#         for skill in self.skills:
+#             print(skill)
+#
+#     def attack(self, idx):
+#         print(f'{self.skills[idx]} 공격 시전')
+#
+#     # owner = property(get_owner, set_owner)
+#
+# class Pikachu(Pokemon):
+#     def __init__(self, owner, skills):
+#         super().__init__(owner, skills)
+#         self.name = "꼬부기"
+#         print(f"{self.name}")
+#
+#     def attack(self, idx):
+#         print(f'{self.owner}의 {self.name}의 {self.skills[idx]} 공격(전기) 시전')
+#
+#
+# class Ggo(Pokemon):
+#     def __init__(self, owner, skills):
+#         super().__init__(owner, skills)
+#         self.name = "꼬부기"
+#         print(f"{self.name}")
+#
+#     def attack(self, idx):
+#         print(f'{self.owner}의 {self.name}의 {self.skills[idx]} 공격(물) 시전')
 
 
 # pk1 = Pikachu('한지우','몸톧박치기/번개')
@@ -57,18 +58,20 @@ class Ggo(Pokemon):
 
 # multiple_inheritance
 
-class Animal:
-    def says(self):
-        return 'I speak!'
+# class Animal:
+#     def says(self):
+#         return 'I speak!'
 
 
 # example
 
 class Pokemon:
+    count = 0
     def __init__(self, owner, skills):
         print(f"포켓몬 생성 :", end='')
         self.owner = owner
         self.skills = skills.split('/')
+        Pokemon.count += 1
 
     def info(self):
         print(f"{self.owner}의 포켓몬이 사용가능한 스킬은{self.skills}입니다.")
@@ -107,6 +110,7 @@ class Pairi(Pokemon):
         print(f'{self.owner}의 {self.name}의 {self.skills[idx]} 공격(불) 시전')
 
 while True:
+    print(f"총 {Pokemon.count}마리의 포켓몬이 생성되었습니다")
     menu = input('1) 포켓몬 생성  2) 프로그램 종료 : ')
     if menu == '2':
         print('프로그램을 종료합니다.')

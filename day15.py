@@ -23,11 +23,9 @@ def delete_data(idx):
     pokemons[idx] = None  # 데이터 삭제
 
     for i in range(idx + 1, len_pokemons):
-        pokemons[i - 1] = pokemons[i]
-        pokemons[i] = None  # 배열의 맨 마지막 위치 삭제
-
-    del (pokemons[len_pokemons - 1])
-
+        pokemons[i] = None
+    while not pokemons[-1]:
+        pokemons.pop()
 
 if __name__ == "__main__":
     insert_data(3, '거북왕')
@@ -36,6 +34,4 @@ if __name__ == "__main__":
     print(pokemons)
 
     delete_data(3)
-    print(pokemons)
-    delete_data(5)
     print(pokemons)

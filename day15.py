@@ -1,87 +1,52 @@
-pokemons = ["피카츄", "라이츄", "꼬부기", "파이리", "이상해씨"]
-
-def insert_data(idx, pokemon):
+def print_poly(px):
     """
-    선형 리스트 특정 위치에 삽입
-    :param idx:
-    :param pokemon:
+    다항식을 출력하는 함수
+    :param px:
     :return:
     """
-    if idx < 0 or idx > len(pokemons):
-        print("Out of range!")
-        return
+    term = len(px) - 1
+    poly_str = "P(x) = "
 
-    pokemons.append(None)  # 빈칸 추가
+    for i in range(len(px)):
+        coef = px[i]  # 계수
 
-    for i in range(len(pokemons) - 1, idx, -1):
-        pokemons[i] = pokemons[i - 1]
-        pokemons[i - 1] = None
+        if coef == 0:
+            term -= 1
+            continue
+        if coef > 0 and not i == 0:
+            poly_str += "+"
+        poly_str += f'{coef}x^{term} '
+        term -= 1
 
-    pokemons[idx] = pokemon  # 지정한 위치에 친구 추가
+    return poly_str
 
 
-def delete_data(idx):
+def calc_poly(xVal, px):
     """
-    선형 리스트 원소 삭제
-    :param idx:
+    계산하는 함수
+    :param xVal:
+    :param px:
     :return:
     """
-    if idx < 0 or idx > len(pokemons):
-        print("데이터를 삭제할 범위를 벗어났습니다.")
-        return
+    retValue = 0
+    term = len(px) - 1
 
-    len_pokemons = len(pokemons)
-    pokemons[idx] = None  # 데이터 삭제
+    for i in range(len(px)):
+        coef = px[i]  # 계수
+        retValue += coef * xValue ** term
+        term -= 1
 
-    for i in range(idx + 1, len_pokemons):
-        pokemons[i] = None
-    while not pokemons[-1]:
-        pokemons.pop()
+    return retValue
 
-def add_data(pokemon):
-    """
-    선형 리스트 맨 뒤에 원소 삽입
-    :param pokemon:
-    :return:
-    """
-    pokemons.append(None)
-    pokemons[-1] = pokemon
+px = [7, -4, 0, 5]  # = 7x^3 -4x^2 +0x^1 +5x^0
 
 if __name__ == "__main__":
-    # insert_data(3, '거북왕')
-    # print(pokemons)
-    # insert_data(6, '어니부기')
-    # print(pokemons)
-    #
-    # delete_data(3)
-    # print(pokemons)
-    #
-    # add_data("터검니")
-    # print(pokemons)
+    p_str = print_poly(px)
+    print(p_str)
 
-    select = -1
-    pokemons = []
+    xValue = int(input("X 값 : "))
 
-    while select != 4:
+    pxValue = calc_poly(xValue, px)
+    print(pxValue)
 
-        select = int(input("선택하세요(1: 추가, 2: 삽입, 3: 삭제, 4: 종료)--> "))
 
-        if (select == 1):
-            poke = input("추가할 데이터--> ")
-            add_data(poke)
-            print(pokemons)
-        elif (select == 2):
-            pos = int(input("삽입할 위치--> "))
-            poke = input("추가할 데이터--> ")
-            insert_data(pos, poke)
-            print(pokemons)
-        elif (select == 3):
-            pos = int(input("삭제할 위치--> "))
-            delete_data(pos)
-            print(pokemons)
-        elif (select == 4):
-            print(pokemons)
-            exit
-        else:
-            print("1~4 중 하나를 입력하세요.")
-            continue

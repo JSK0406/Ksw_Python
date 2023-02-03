@@ -1,20 +1,37 @@
-def insert(name, times):
-    tmp = (name, times)
-    for i in data[::-1]:
-        if times >= i[1]:
-            continue
-        else:
-            idx = data.index(i) + 1
-            break
-    else:
-        idx = 0
-    data.insert(res, tmp)
+class Node():
+    def __init__(self):
+        self.data = None
+        self.link = None
 
+
+def print_nodes(start):
+    current = start
+    if current == None:
+        return
+    print(current.data, end=' ')
+    while current.link != None:
+        current = current.link
+        print(current.data, end=' ')
+    print()
+
+
+lst = []
+head, current, pre = None, None, None
+dataArray = ["피카츄", "라이츄", "꼬부기", "파이리", "이상해씨"]
 
 if __name__ == "__main__":
-    data = [('다현', 200), ('정연', 150), ('쯔위', 90), ('사나', 30), ('지효', 15)]
-    insert('미나', 40)
-    print(data)
-    insert('A', 250)
-    print(data)
+    node = Node()  # 첫 번째 노드
+    node.data = dataArray[0]
+    head = node
+    lst.append(node)
 
+    for data in dataArray[1:]:  # 두 번째 이후 노드
+        pre = node
+        node = Node()
+        node.data = data
+        pre.link = node
+        lst.append(node)
+
+    print_nodes(head)
+    print_nodes(lst[2])
+    print(lst)

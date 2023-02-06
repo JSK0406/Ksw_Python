@@ -1,216 +1,91 @@
-import random
+# stack = [None]*5
+# top = -1
+#
+# top += 1
+# stack[top] = "커피"
+# top += 1
+# stack[top] = "녹차"
+# top += 1
+# stack[top] = "꿀물"
+#
+# for i in range(len(stack)-1, -1, -1):
+#     print(stack[i])
+#
+# stack[top] = None
+# top -= 1
+# stack[top] = None
+# top -= 1
+#
+# for i in range(len(stack) - 1, -1, -1):
+#     print(stack[i])
 
 
-# 링크드리스트의 여러 기능 구현
-
-class Node():
-    def __init__(self, data):
-        self.data = data
-        self.link = None
-
-
-def print_nodes(start):
-    current = start
-    if current.link == None:
-        return
-    print(current.data, end=' ')
-    while current.link != head:
-        current = current.link
-        print(current.data, end=' ')
-    print()
-
-
-def insert_node(find_data, insert_data):
-    global head, current, pre
-
-    if head.data == find_data:
-        node = Node(insert_data)
-        node.link = head
-        last = head
-        while last.link != head:
-            last = last.link
-        last.link = node
-        head = node
-        return
-
-    current = head
-    while current.link != head:  # 중간 노드 삽입
-        pre = current
-        current = current.link
-        if current.data == find_data:
-            node = Node(insert_data)
-            node.link = current
-            pre.link = node
-            return
-
-    node = Node(insert_data)  # 마지막 노드 삽입
-    current.link = node
-    node.link = head
-
-
-def delete_node(delete_data):
-    global pre, current, head
-
-    if head.data == delete_data:
-        current = head
-        head = head.link
-        last = head
-        while last.link != current:
-            last = last.link
-        last.link = head
-        del current
-        return
-
-    current = head
-    while current.link != None:
-        pre = current
-        current = current.link
-        if current.data == delete_data:
-            pre.link = current.link
-            del current
-            return
-
-    return
-
-
-def find_node(find_data):
-    global pre, head, current
-
-    current = head
-
-    if current.data == find_data:
-        return current
-
-    while current.link != head:
-        pre = current
-        current = current.link
-        if current.data == find_data:
-            return current
-    return Node(None)
-
-
-def is_find(find_data):
-    global pre, head, current
-
-    current = head
-
-    if current.data == find_data:
+def is_stack_full():
+    global SIZE, stack, top
+    if top >= SIZE - 1:
         return True
-
-    while current.link != head:
-        pre = current
-        current = current.link
-        if current.data == find_data:
-            return True
     return False
 
-def count_odd_even():
-    global head, current, pre
 
-    # if head == None:
-    #     return False
+def is_stack_empty():
+    global SIZE, stack, top
+    if top <= -1:
+        return True
+    return False
 
-    current = head
-    even, odd = 0, 0
-    while True:
-        if current.data % 2 == 0:
-            even += 1
-        else:
-            odd += 1
-        if current.link == head:
-            break
-        current = current.link
-    return odd, even
 
-def count_plus_minus():
-    global head, current, pre
+def push(data):
+    global SIZE, stack, top
+    if is_stack_full():
+        print("Stack is full")
+        return
+    top += 1
+    stack[top] = data
 
-    # if head == None:
-    #     return False
 
-    current = head
-    plus, minus, zero = 0, 0, 0
-    while True:
-        if current.data > 0:
-            plus += 1
-        elif current.data < 0:
-            minus += 1
-        else:
-            zero += 1
-        if current.link == head:
-            break
-        current = current.link
-    return plus, minus, zero
+def pop():
+    global SIZE, stack, top
+    if is_stack_empty():
+        print("Stack is empty")
+        return
+    tmp = stack[top]
+    stack[top] = None
+    top -= 1
+    return tmp
 
-def make_minus_number(odd, even):
-    if odd > even:
-        remainder = 1
-    else:
-        remainder = 0
 
-    current = head
-    while True:
-        if current.data % 2 == remainder:
-            current.data = current.data * -1
 
-        if current.link == head:
-            break
-        current = current.link
+def peek():
+    global SIZE, stack, top
+    if is_stack_empty():
+        print("Stack is empty")
+        return None
+    return stack[top]
 
-def conversion_sign():
-    current = head
-    while True:
-        current.data = current.data * -1
-        if current.link == head:
-            break
-        current = current.link
 
-# head, current, pre = None, None, None
-# data_array = ["피카츄", "라이츄", "꼬부기", "파이리", "이상해씨"]
-# data_array = [random.randint(1, 100) for _ in range(7)]
-data_array = [random.randint(-100, 100) for _ in range(7)]
+SIZE = int(input("Stack Size : "))
+stack = [None] * SIZE
+top = -1
+
 if __name__ == "__main__":
 
-    node = Node(data_array[0])  # 첫 번째 노드
-    head = node
-    head.link = head
+    while True:
+        select = input("Insert(I)/Extract(E)/Verify(V)/Exit(X) choose one ==> ")
+        if select == 'X' or select == 'x':
+            break
+        elif select == 'I' or select == 'i':
+            data = input("input data ==> ")
+            push(data)
+            print("스택 상태 : ", stack)
+        elif select == 'E' or select == 'e':
+            data = pop()
+            print("extract data ==> ", data)
+            print("status of stack : ", stack)
+        elif select == 'V' or select == 'v':
+            data = peek()
+            print("verifyed data ==> ", data)
+            print("status of stack : ", stack)
+        else:
+            print("input is wrong")
 
-    for data in data_array[1:]:  # 두 번째 이후 노드
-        pre = node
-        node = Node(data)
-        pre.link = node
-        node.link = head
-
-
-    print_nodes(head)
-
-# o, e = count_odd_even()
-# make_minus_number()
-p, m, z = count_plus_minus()
-print("plus :", p, "minus :", m, "zero :", z)
-conversion_sign()
-# print("odd number :", o, "even number :", e)
-print_nodes(head)
-
-
-    # print_nodes(head)
-    # delete_node("피카츄")
-    # print_nodes(head)
-    # print(find_node("꼬부기").data)
-    # print(is_find("꼬부기"))
-    # print(is_find("잠만보"))
-
-    # insert_node("피카츄", "잠만보")
-    #
-    # print_nodes(head)
-    # delete_node("잠만보")
-    # print_nodes(head)
-    # delete_node("이상해씨")
-    # print_nodes(head)
-    # delete_node("강찬석")
-    # print_nodes(head)
-    # print(find_node("피카츄").data)
-    # print(find_node("피카츄"))
-    # print(find_node("abc").data)
-    #
-    #
+    print("Finish!")

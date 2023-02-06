@@ -140,41 +140,9 @@ if __name__ == "__main__":
 
 # ex) 06-02
 
-
-def is_stack_full():
-    if top >= len(lst)-1:
-        return True
-    return False
-
-def is_stack_empty():
-    global stack, top
-    if top <= -1:
-        return True
-    return False
-
-def push(data):
-    global stack, top
-    top += 1
-    stack[top] = data
-    return data
-
-def pop():
-    global stack, top
-    tmp = stack[top]
-    stack[top] = None
-    top -= 1
-    return tmp
-
-def peek():
-    global stack, top
-    if is_stack_empty():
-        return None
-    return stack[top]
-
-if __name__ == "__main__":
     top = -1
     text_lst = "진달래꽃\n나 보기가 역겨워\n가실 때에는\n말없이 고이 보내드리오리다."
-    stack = [None]*len(text_lst)
+    stack = [None] * len(text_lst)
     print('///// 4번 문제 /////')
     print('----- 원본 -----')
     for i in text_lst:
@@ -182,4 +150,4 @@ if __name__ == "__main__":
     print('')
     print('----- 거꾸로 처리된 결과 -----')
     for _ in range(len(text_lst)):
-        print(pop(), end ='')
+        print(pop(), end='')

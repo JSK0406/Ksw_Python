@@ -122,6 +122,26 @@ def count_odd_even():
         current = current.link
     return odd, even
 
+def count_plus_minus():
+    global head, current, pre
+
+    # if head == None:
+    #     return False
+
+    current = head
+    plus, minus, zero = 0, 0, 0
+    while True:
+        if current.data > 0:
+            plus += 1
+        elif current.data < 0:
+            minus += 1
+        else:
+            zero += 1
+        if current.link == head:
+            break
+        current = current.link
+    return plus, minus, zero
+
 def make_minus_number(odd, even):
     if odd > even:
         remainder = 1
@@ -137,10 +157,18 @@ def make_minus_number(odd, even):
             break
         current = current.link
 
+def conversion_sign():
+    current = head
+    while True:
+        current.data = current.data * -1
+        if current.link == head:
+            break
+        current = current.link
+
 # head, current, pre = None, None, None
 # data_array = ["피카츄", "라이츄", "꼬부기", "파이리", "이상해씨"]
-data_array = [random.randint(1, 100) for _ in range(7)]
-
+# data_array = [random.randint(1, 100) for _ in range(7)]
+data_array = [random.randint(-100, 100) for _ in range(7)]
 if __name__ == "__main__":
 
     node = Node(data_array[0])  # 첫 번째 노드
@@ -153,11 +181,15 @@ if __name__ == "__main__":
         pre.link = node
         node.link = head
 
+
     print_nodes(head)
 
-o, e = count_odd_even()
-make_minus_number(o, e)
-print("odd number : ", o, "even number", e)
+# o, e = count_odd_even()
+# make_minus_number()
+p, m, z = count_plus_minus()
+print("plus :", p, "minus :", m, "zero :", z)
+conversion_sign()
+# print("odd number :", o, "even number :", e)
 print_nodes(head)
 
 

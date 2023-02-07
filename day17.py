@@ -1,100 +1,101 @@
-import webbrowser
-import time
+import random
+## 함수 선언 부분 ##
+class TreeNode() :
+	def __init__ (self) :
+		self.left = None
+		self.data = None
+		self.right = None
 
-def is_stack_full():
-    global SIZE, stack, top
-    if top >= SIZE - 1:
-        return True
-    return False
+## 전역 변수 선언 부분 ##
+memory = []
+rootBook, rootAuth = None, None
+bookAry = [ ['어린왕자', '쌩떽쥐베리'],['이방인', '까뮈'], ['부활', '톨스토이'],
+		   ['신곡', '단테'], ['돈키호테', '세브반테스'], ['동물농장', '조지오웰'],
+		   ['데미안','헤르만헤세'], ['파우스트', '괴테'], ['대지', '펄벅'] ]
+random.shuffle(bookAry)
 
+## 메인 코드 부분 ##
 
-def is_stack_empty():
-    global SIZE, stack, top
-    if top <= -1:
-        return True
-    return False
+### 책 이름 트리 ###
+node = TreeNode()
+node.data = bookAry[0][0]
+rootBook = node
+memory.append(node)
 
+for book in bookAry[1:] :
+	name = book[0]
+	node = TreeNode()
+	node.data = name
 
-def push(data):
-    global SIZE, stack, top
-    if is_stack_full():
-        print("Stack is full")
-        return
-    top += 1
-    stack[top] = data
-
-
-def pop():
-    global SIZE, stack, top
-    if is_stack_empty():
-        return
-    tmp = stack[top]
-    stack[top] = None
-    top -= 1
-    return tmp
-
-
-
-def peek():
-    global SIZE, stack, top
-    if is_stack_empty():
-        print("Stack is empty")
-        return None
-    return stack[top]
-
-def check_bracket(expr) :
-	for ch in expr:
-		if ch in '([{<':
-			push(ch)
-		elif ch in ')]}>':
-			out = pop()
-			if ch == ')' and out == '(':
-				pass
-			elif ch == ']' and out == '[':
-				pass
-			elif ch == '}' and out == '{':
-				pass
-			elif ch == '>' and out == '<':
-				pass
-			else:
-				return False
+	current = rootBook
+	while True :
+		if name < current.data :
+			if current.left == None :
+				current.left = node
+				break
+			current = current.left
 		else :
-			pass
-	return is_stack_empty()
+			if current.right == None :
+				current.right = node
+				break
+			current = current.right
+
+	memory.append(node)
+
+print("책 이름 트리 구성 완료!")
+
+### 작가 이름 트리 ###
+node = TreeNode()
+node.data = bookAry[0][1]
+rootAuth = node
+memory.append(node)
+
+for book in bookAry[1:] :
+	name = book[1]
+	node = TreeNode()
+	node.data = name
+
+	current = rootAuth
+	while True :
+		if name < current.data :
+			if current.left == None :
+				current.left = node
+				break
+			current = current.left
+		else :
+			if current.right == None :
+				current.right = node
+				break
+			current = current.right
+
+	memory.append(node)
+
+print("작가 이름 트리 구성 완료!")
+
+## 책 이름 및 작가 이름 검색 ##
+bookOrAuth = int(input('책검색(1), 작가검색(2)-->'))
+findName = input('검색할 책 또는 작가-->')
+
+if bookOrAuth == 1 :
+	root = rootBook
+else :
+	root = rootAuth
+
+current = root
+while True:
+	if findName == current.data :
+		print(findName, '을(를) 찾음.')
+		findYN = True
+		break
+	elif findName < current.data :
+		if current.left == None :
+			print(findName, '이(가) 목록에 없음')
+			break
+		current = current.left
+	else:
+		if current.right == None :
+			print(findName, '이(가) 목록에 없음')
+			break
+		current = current.right
 
 
-if __name__ == "__main__" :
-    # url 방문
-
-    # top = -1
-    # SIZE = 100
-    # stack = [None] * SIZE
-    # urls = [ 'inha.edu', 'harvard.edu', 'yale.edu']
-    #
-    # for url in urls :
-    #     push(url)
-    #     webbrowser.open('http://'+url)
-    #     print(url, end = '-->')
-    #     time.sleep(1)
-    #
-    # print("방문 종료")
-    # time.sleep(5)
-    #
-    # while True :
-    #     url = pop()
-    #     if url == None :
-    #         break
-    #     webbrowser.open('http://'+url)
-    #     print(url, end = '-->')
-    #     time.sleep(1)
-    # print("방문 종료")
-
-    SIZE = 100
-    stack = [None for _ in range(SIZE)]
-    top = -1
-
-    expr_arr = ['(2*[3+1)]', '(A+B)', ')A+B(', '((A+B)-C', '(A+B]', '(<A+{B-C}/[C*D]>)']
-
-    for expr in expr_arr:
-        top = -1
-        print(expr, '==>', check_bracket(expr))

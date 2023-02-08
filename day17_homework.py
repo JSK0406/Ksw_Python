@@ -150,7 +150,7 @@ class BinaryTree:
                 current = current.right
                 continue
 
-    def preorder(self, node):
+    def preorder(self, node=self.root):
         if node is None:
             return
         print(node.data, end=' ')
@@ -170,4 +170,4 @@ print('오늘 판매된 물건(중복O) -->', *sell_arr)
 
 print('\n이진 탐색 트리 구성 완료!\n')
 print('판매된 종류(중복X)-->', end=' ')
-test.preorder(test.root)
+test.preorder()

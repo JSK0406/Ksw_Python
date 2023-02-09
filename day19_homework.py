@@ -1,23 +1,17 @@
-# 10-01
+# 11-01
 
-num_char_lst = [chr((ord('0') + i)) for i in range(10)]
-num_char_lst += [chr(65+i) for i in range(6)]
+score_arr = [['선미', 88], ['초아', 99], ['화사', 71], ['영탁', 78], ['영웅', 67], ['민호', 92]]
 
-def notation(n, base):
-    if n < base:
-        print(num_char_lst[n], end='')
-        return
-    notation(n // base, base)
-    print(num_char_lst[n % base], end='')
+def insert_sort(arr):
+    n = len(score_arr)
+    for right in range(n):
+        for left in range(right, 0, -1):
+            if score_arr[left][1] < score_arr[left-1][1]:
+                score_arr[left], score_arr[left-1] = score_arr[left-1], score_arr[left]
 
-n = int(input('10진수 입력 --> '))
-print('')
+    return arr
 
-print('2진수 : ', end='')
-notation(n, 2)
-print('')
-print('8진수 : ', end='')
-notation(n, 8)
-print('')
-print('16진수 : ', end='')
-notation(n, 16)
+print('정렬 전 -->', score_arr)
+print('정렬 후 -->', insert_sort(score_arr))
+for i in range(len(score_arr)//2):
+    print(score_arr[i][0], ':', score_arr[len(score_arr)-i-1][0])

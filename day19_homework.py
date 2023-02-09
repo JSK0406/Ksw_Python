@@ -1,17 +1,19 @@
 # 11-01
 
-score_arr = [['선미', 88], ['초아', 99], ['화사', 71], ['영탁', 78], ['영웅', 67], ['민호', 92]]
+arr2 = [[55, 33, 250, 44], [88, 1, 67, 23], [199, 222, 38, 47], [155, 145, 20, 99]]
+arr1 = []
+for i in arr2:
+    arr1 += i
 
 def insert_sort(arr):
-    n = len(score_arr)
+    n = len(arr)
     for right in range(n):
         for left in range(right, 0, -1):
-            if score_arr[left][1] < score_arr[left-1][1]:
-                score_arr[left], score_arr[left-1] = score_arr[left-1], score_arr[left]
+            if arr[left] < arr[left-1]:
+                arr[left], arr[left-1] = arr[left-1], arr[left]
 
     return arr
 
-print('정렬 전 -->', score_arr)
-print('정렬 후 -->', insert_sort(score_arr))
-for i in range(len(score_arr)//2):
-    print(score_arr[i][0], ':', score_arr[len(score_arr)-i-1][0])
+print('정렬 전 -->', arr1)
+print('정렬 후 -->', insert_sort(arr1))
+print('중앙값 -->', arr1[len(arr1)//2])

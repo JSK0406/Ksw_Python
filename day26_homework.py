@@ -1,42 +1,36 @@
 import random
 
-def binary_search(arr, find_product):
+
+def seq_search(arr, find_data):
+    for i in range(len(arr)):
+        if arr[i] == find_data:
+            return i+1
+
+
+def bin_search(arr, find_data):
     left = 0
-    right = len(arr)-1
+    right = len(arr) - 1
+    cnt = 0
     while left <= right:
-        mid = (left+right) // 2
-        if arr[mid] == find_product:
-            return mid
-        elif arr[mid] < find_product:
+        cnt += 1
+        mid = (left + right) // 2
+        if arr[mid] == find_data:
+            break
+        elif arr[mid] < find_data:
             left = mid + 1
         else:
-            right = mid -1
-    return -1
+            right = mid - 1
+    return cnt
 
 
+find_data = 7878
 
-data_arr = ['바나나맛우유', '레쓰비캔커피', '츄파춥스', '도시락', '삼다수', '코카콜라', '삼각김밥']
-sell_arr = [random.choice(data_arr) for _ in range(20)]
+data_arr = [random.randint(0, 999999) for _ in range(1000000)]
+data_arr.insert(random.randint(0, 1000000), find_data)
+sorted_arr = sorted(data_arr)
 
-print('#오늘 판매된 전체 물건(중복O, 정렬X) -->', sell_arr)
-sell_arr.sort()
-print('#오늘 판매된 전체 물건(중복O, 정렬O) -->', sell_arr)
-sell_product = list(set(sell_arr))
-print('#오늘 판매된 물품 종류(중복x) -->', sell_product)
+print('#비정렬 배열(100만개) -->', data_arr[0:5], '~~~~', data_arr[-5:len(data_arr)])
+print('#정렬 배열(100만개) -->', sorted_arr[0:5], '~~~~', sorted_arr[-5:len(sorted_arr)])
 
-count_lst = []
-
-for product in sell_product:
-    cnt = 0
-    while True:
-        product_idx = binary_search(sell_arr, product)
-        if product_idx == -1:
-            break
-        else:
-            del sell_arr[product_idx]
-            cnt += 1
-    count_lst.append((product, cnt))
-print(count_lst)
-
-print()
-print("결산 결과 ==>", count_lst)
+print('순차 검색(비정렬 데이터) -->', seq_search(data_arr, find_data), '회')
+print('순차 검색(비정렬 데이터) -->', bin_search(data_arr, find_data), '회')
